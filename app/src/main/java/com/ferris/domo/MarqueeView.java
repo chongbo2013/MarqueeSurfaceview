@@ -24,7 +24,7 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback {
     protected float textSize = 100; //时间数字的字体大小
     protected int textColor = Color.RED; //时间数字的颜色
     private String margueeString;
-    private float textWidth=0,textHeight=0;
+    private int textWidth=0,textHeight=0;
     protected float padTextSize=0;
 
     public MarqueeView(Context context) {
@@ -72,9 +72,9 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback {
         mTextPaint.setFakeBoldText(true);
         // 设定阴影(柔边, X 轴位移, Y 轴位移, 阴影颜色)
         mTextPaint.setShadowLayer(5, 3, 3, ShadowColor);
-        textWidth = mTextPaint.measureText(margueeString);
+        textWidth = (int)mTextPaint.measureText(margueeString);
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        textHeight = fontMetrics.bottom;
+        textHeight = (int) fontMetrics.bottom;
     }
 
     @Override
@@ -140,7 +140,7 @@ public class MarqueeView extends SurfaceView implements SurfaceHolder.Callback {
 
 
                   if(currentX>=contentWidth){
-                      currentX=0;
+                      currentX=-textWidth;
                   }else{
                       currentX+=sepX;
                   }
